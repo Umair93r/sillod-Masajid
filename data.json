@@ -1,0 +1,104 @@
+{
+  "todayData": {
+    "dateReadable": "09 December 2025",
+    "hijri": "27 Jumada al-Akhirah 1447H",
+    "city": "Sillod, Maharashtra",
+    "prayers": [
+      {
+        "name": "Fajr",
+        "adhan": "05:15 AM",
+        "iqamah": "05:30 AM"
+      },
+      {
+        "name": "Sunrise",
+        "adhan": "-",
+        "iqamah": "06:50 AM"
+      },
+      {
+        "name": "Dhuhr",
+        "adhan": "01:15 PM",
+        "iqamah": "01:30 PM"
+      },
+      {
+        "name": "Asr",
+        "adhan": "04:30 PM",
+        "iqamah": "04:45 PM"
+      },
+      {
+        "name": "Maghrib",
+        "adhan": "Sunset",
+        "iqamah": "06:05 PM"
+      },
+      {
+        "name": "Isha",
+        "adhan": "07:45 PM",
+        "iqamah": "08:00 PM"
+      }
+    ]
+  },
+  "weekTimetable": [
+    {
+      "day": "Tuesday",
+      "fajr": "05:30",
+      "dhuhr": "13:30",
+      "asr": "16:45",
+      "maghrib": "18:05",
+      "isha": "20:00",
+      "jumuah": "—"
+    },
+    {
+      "day": "Wednesday",
+      "fajr": "05:31",
+      "dhuhr": "13:30",
+      "asr": "16:45",
+      "maghrib": "18:05",
+      "isha": "20:00",
+      "jumuah": "—"
+    },
+    {
+      "day": "Thursday",
+      "fajr": "05:32",
+      "dhuhr": "13:30",
+      "asr": "16:46",
+      "maghrib": "18:06",
+      "isha": "20:01",
+      "jumuah": "—"
+    },
+    {
+      "day": "Friday",
+      "fajr": "05:32",
+      "dhuhr": "13:30",
+      "asr": "16:46",
+      "maghrib": "18:06",
+      "isha": "20:01",
+      "jumuah": "13:45"
+    },
+    {
+      "day": "Saturday",
+      "fajr": "05:33",
+      "dhuhr": "13:31",
+      "asr": "16:47",
+      "maghrib": "18:07",
+      "isha": "20:02",
+      "jumuah": "—"
+    },
+    {
+      "day": "Sunday",
+      "fajr": "05:34",
+      "dhuhr": "13:31",
+      "asr": "16:47",
+      "maghrib": "18:07",
+      "isha": "20:02",
+      "jumuah": "—"
+    },
+    {
+      "day": "Monday",
+      "fajr": "05:35",
+      "dhuhr": "13:31",
+      "asr": "16:48",
+      "maghrib": "18:08",
+      "isha": "20:03",
+      "jumuah": "—"
+    }
+  ]
+}
