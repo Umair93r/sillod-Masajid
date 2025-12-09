@@ -3,7 +3,46 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
+
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "masjid123";
+
+function adminAuth(req, res, next) {
+  const pwd = req.headers["x-admin-password"];
+  if (pwd !== ADMIN_PASSWORD) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  next();
+}
+
+
+
+
 const PORT = process.env.PORT || 3000;
+
+// --- Simple username/password for admin (Basic Auth) ---
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "masjid123";
+
+function basicAuth(req, res, next) {
+  const authHeader = req.headers.authorization || "";
+  const [type, value] = authHeader.split(" ");
+
+  if (type !== "Basic" || !value) {
+    res.set("WWW-Authenticate", 'Basic realm="Al Masjid Admin"');
+    return res.status(401).send("Authentication required");
+  }
+
+  const [user, pass] = Buffer.from(value, "base64").toString().split(":");
+
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+    return next();
+  }
+
+  res.set("WWW-Authenticate", 'Basic realm="Al Masjid Admin"');
+  return res.status(401).send("Invalid credentials");
+}
+
+
 
 // ---- In-memory data ----
 let todayData = {
@@ -65,7 +104,7 @@ app.get("/api/masjid", (req, res) => {
 });
 
 // Admin API
-app.post("/api/admin/timings", (req, res) => {
+app.post("/api/admin/timings", adminAuth, (req, res) => {
   const { dateReadable, hijri, city, prayers } = req.body;
   console.log("Received admin update:", req.body);
 
@@ -85,7 +124,7 @@ app.post("/api/admin/timings", (req, res) => {
 });
 
 // Route for /admin
-app.get("/admin", (req, res) => {
+app.get("/admin", basicAuth, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
 
