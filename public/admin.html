@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Al Masjid Sillod</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    .layout {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 22px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e5e7eb;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+    }
+    h2 {
+      margin-top: 18px;
+      font-size: 18px;
+    }
+    p {
+      margin: 4px 0 10px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 8px;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: #047857;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+    }
+    .row-meta {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .row-meta > div {
+      flex: 1 1 150px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 2px;
+      color: #374151;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .link {
+      font-size: 13px;
+    }
+    .link a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .link a:hover {
+      text-decoration: underline;
+    }
+    .status {
+      font-size: 12px;
+      color: #16a34a;
+    }
+    .error {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <h1>Admin – Al Masjid, Sillod</h1>
+    <p>Update <strong>today’s prayer timings</strong> without touching the code.</p>
+
+    <div class="row-meta">
+      <div>
+        <label for="dateReadable">Date (English)</label>
+        <input type="text" id="dateReadable" />
+      </div>
+      <div>
+        <label for="hijri">Date (Hijri)</label>
+        <input type="text" id="hijri" />
+      </div>
+      <div>
+        <label for="city">City</label>
+        <input type="text" id="city" />
+      </div>
+    </div>
+
+    <h2>Today’s Timings</h2>
+    <p>Fill Adhan &amp; Iqamah times. Click <strong>Save</strong> to apply.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Prayer</th>
+          <th>Adhan</th>
+          <th>Iqamah</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fajr</td>
+          <td><input type="text" id="adhan-Fajr" /></td>
+          <td><input type="text" id="iqamah-Fajr" /></td>
+        </tr>
+        <tr>
+          <td>Sunrise</td>
+          <td><input type="text" id="adhan-Sunrise" /></td>
+          <td><input type="text" id="iqamah-Sunrise" /></td>
+        </tr>
+        <tr>
+          <td>Dhuhr</td>
+          <td><input type="text" id="adhan-Dhuhr" /></td>
+          <td><input type="text" id="iqamah-Dhuhr" /></td>
+        </tr>
+        <tr>
+          <td>Asr</td>
+          <td><input type="text" id="adhan-Asr" /></td>
+          <td><input type="text" id="iqamah-Asr" /></td>
+        </tr>
+        <tr>
+          <td>Maghrib</td>
+          <td><input type="text" id="adhan-Maghrib" /></td>
+          <td><input type="text" id="iqamah-Maghrib" /></td>
+        </tr>
+        <tr>
+          <td>Isha</td>
+          <td><input type="text" id="adhan-Isha" /></td>
+          <td><input type="text" id="iqamah-Isha" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <button id="saveBtn">Save timings</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <p class="link">
+      🔙 <a href="/">Back to main timings page</a>
+    </p>
+  </div>
+
+  <script>
+    const PRAYERS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    const saveBtn = document.getElementById("saveBtn");
+    const statusEl = document.getElementById("status");
+
+    async function loadData() {
+      try {
+        const res = await fetch("/api/timings/today");
+        const data = await res.json();
+
+        document.getElementById("dateReadable").value = data.dateReadable || "";
+        document.getElementById("hijri").value = data.hijri || "";
+        document.getElementById("city").value = data.city || "";
+
+        PRAYERS.forEach((name) => {
+          const p = data.prayers.find((x) => x.name === name) || {};
+          document.getElementById("adhan-" + name).value = p.adhan || "";
+          document.getElementById("iqamah-" + name).value = p.iqamah || "";
+        });
+      } catch (err) {
+        statusEl.textContent = "Failed to load data.";
+        statusEl.classList.add("error");
+        console.error("loadData error:", err);
+      }
+    }
+
+    async function saveData() {
+      saveBtn.disabled = true;
+      statusEl.textContent = "Saving...";
+      statusEl.classList.remove("error");
+
+      const dateReadable = document.getElementById("dateReadable").value;
+      const hijri = document.getElementById("hijri").value;
+      const city = document.getElementById("city").value;
+
+      const prayers = PRAYERS.map((name) => ({
+        name,
+        adhan: document.getElementById("adhan-" + name).value,
+        iqamah: document.getElementById("iqamah-" + name).value,
+      }));
+
+      try {
+        const res = await fetch("/api/admin/timings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ dateReadable, hijri, city, prayers }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          console.error("Server error:", data);
+          throw new Error(data.error || "Server error");
+        }
+
+        statusEl.textContent = "Saved! Refresh main page to see changes.";
+        console.log("Saved OK:", data);
+      } catch (err) {
+        statusEl.textContent = "Error saving timings.";
+        statusEl.classList.add("error");
+        console.error("saveData error:", err);
+      } finally {
+        saveBtn.disabled = false;
+      }
+    }
+
+    saveBtn.addEventListener("click", saveData);
+
+    loadData();
+  </script>
+</body>
+</html>
