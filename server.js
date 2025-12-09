@@ -6,13 +6,6 @@ const app = express();
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "masjid123";
 
-function adminAuth(req, res, next) {
-  const pwd = req.headers["x-admin-password"];
-  if (pwd !== ADMIN_PASSWORD) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-  next();
-}
 
 
 
@@ -104,7 +97,7 @@ app.get("/api/masjid", (req, res) => {
 });
 
 // Admin API
-app.post("/api/admin/timings", adminAuth, (req, res) => {
+app.post("/api/admin/timings", basicAuth, (req, res)) => {
   const { dateReadable, hijri, city, prayers } = req.body;
   console.log("Received admin update:", req.body);
 
