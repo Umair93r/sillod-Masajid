@@ -1,0 +1,15 @@
+{
+  "todayData": {
+    "dateReadable": "09 December 2025",
+    "hijri": "27 Jumada al-Akhirah 1447H",
+    "city": "Sillod, Maharashtra",
+    "prayers": [
+      { "name": "Fajr", "adhan": "05:15 AM", "iqamah": "05:30 AM" },
+      { "name": "Sunrise", "adhan": "-", "iqamah": "06:50 AM" },
+      { "name": "Dhuhr", "adhan": "01:15 PM", "iqamah": "01:30 PM" },
+      { "name": "Asr", "adhan": "04:30 PM", "iqamah": "04:45 PM" },
+      { "name": "Maghrib", "adhan": "Sunset", "iqamah": "06:05 PM" },
+      { "name": "Isha", "adhan": "07:45 PM", "iqamah": "08:00 PM" }
+    ]
+  }
+}
