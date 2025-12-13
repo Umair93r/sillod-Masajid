@@ -74,7 +74,7 @@ let announcements = [
 ];
 
 let masjidInfo = {
-  name: "Al Masjid, Sillod",
+  name: "SALAAH TIME, Sillod",
   addressLine: "Near [Landmark], Sillod, Maharashtra, India – 431112",
   phone: "+91-98765-43210",
   email: "info@almasjid-sillod.in",
