@@ -216,8 +216,7 @@
       const res = await fetch("/api/timings/today");
       const data = await res.json();
 
-      document.getElementById("today-date").textContent = "Today: " + data.dateReadable;
-      document.getElementById("today-hijri").textContent = data.hijri + " (Example)";
+     
       document.getElementById("today-location").textContent = data.city;
       document.getElementById("city-name").textContent = data.city;
 
@@ -343,8 +342,7 @@
     // Run on page load
     (async () => {
       try {
-            setTodayDate();
-            setHijriDate();
+           setAutoDate(); //automatic every day
         await Promise.all([
           loadToday(),
           loadWeek(),
