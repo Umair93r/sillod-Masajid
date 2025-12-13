@@ -15,7 +15,7 @@ function basicAuth(req, res, next) {
   const [type, value] = authHeader.split(" ");
 
   if (type !== "Basic" || !value) {
-    res.set("WWW-Authenticate", 'Basic realm="Al Masjid Admin"');
+    res.set("WWW-Authenticate", 'Basic realm="SALAAH TIME SILLOD"');
     return res.status(401).send("Authentication required");
   }
 
