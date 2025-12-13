@@ -343,6 +343,8 @@
     // Run on page load
     (async () => {
       try {
+            setTodayDate();
+            setHijriDate();
         await Promise.all([
           loadToday(),
           loadWeek(),
@@ -350,7 +352,7 @@
           loadMasjidInfo(),
         ]);
       } catch (e) {
-        console.error("Failed to load data from backend:", e);
+        console.error("Failed to load data:", e);
       }
     })();
   </script>
