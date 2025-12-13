@@ -224,6 +224,24 @@
       const list = document.getElementById("timings-list");
       list.innerHTML = "";
 
+
+      // add below new line
+
+       function setTodayDate() {
+    const today = new Date();
+
+    const options = {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    };
+
+    const readable = today.toLocaleDateString("en-GB", options);
+
+    document.getElementById("today-date").textContent =
+      "Today: " + readable;
+  }
+
       data.prayers.forEach((p) => {
         const div = document.createElement("div");
         div.className = "timing-item" + (p.name === "Maghrib" ? " highlight" : "");
@@ -286,6 +304,41 @@
       document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
       document.getElementById("masjid-email").textContent = "📧 " + info.email;
     }
+
+
+    // add new line
+
+
+     function setTodayDate() {
+    const today = new Date();
+
+    const options = {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    };
+
+    const readable = today.toLocaleDateString("en-GB", options);
+
+    document.getElementById("today-date").textContent =
+      "Today: " + readable;
+    }
+
+      // new
+
+        function setHijriDate() {
+    const today = new Date();
+
+    const hijri = today.toLocaleDateString("en-TN-u-ca-islamic", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    document.getElementById("today-hijri").textContent =
+      hijri + " Hijri";
+  }
+  
 
     // Run on page load
     (async () => {
