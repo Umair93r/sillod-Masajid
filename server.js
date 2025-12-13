@@ -134,7 +134,7 @@ app.post("/api/admin/timings", basicAuth, (req, res) => {
 
 // Route for /admin (login popup)
 app.get("/admin", basicAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "admin.html"));
+  res.sendFile(path.join(__dirname, "admin", "admin.html"));
 });
 
 app.listen(PORT, () => {
