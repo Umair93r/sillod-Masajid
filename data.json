@@ -1,5 +1,5 @@
 {
-  "todayData": {
+  "masajid": {
     "dateReadable": "09 December 2025",
     "hijri": "27 Jumada al-Akhirah 1447H",
     "city": "Sillod, Maharashtra",
@@ -36,7 +36,7 @@
       }
     ]
   },
-  "weekTimetable": [
+  "masajid": [
     {
       "day": "Tuesday",
       "fajr": "05:30",
