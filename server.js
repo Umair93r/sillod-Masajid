@@ -92,6 +92,34 @@ app.get("/api/timings/today", (req, res) => {
   res.json(todayData);
 });
 
+// ---------------- PUBLIC MASJID LIST ----------------
+app.get("/api/masajid", (req, res) => {
+  res.json(store.masajid);
+});
+
+
+// ---------------- ADD MASJID (ADMIN) ----------------
+app.post("/api/admin/masjid", basicAuth, (req, res) => {
+  const { name, city } = req.body;
+
+  if (!name || !city) {
+    return res.status(400).json({ error: "Name and city required" });
+  }
+
+  const newMasjid = {
+    id: Date.now(),
+    name,
+    city,
+    weekTimetable: []
+  };
+
+  store.masajid.push(newMasjid);
+  fs.writeFileSync(dataFile, JSON.stringify(store, null, 2));
+
+  res.json({ success: true, masjid: newMasjid });
+});
+
+
 app.get("/api/timings/week", (req, res) => {
   res.json(weekTimetable);
 });
