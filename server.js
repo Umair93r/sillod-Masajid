@@ -137,9 +137,6 @@ app.get("/admin", basicAuth, (req, res) => {
   res.sendFile(path.join(__dirname, "admin", "admin.html"));
 });
 
-// New add line
-
-app.use(express.static(path.join(__dirname,"public")))
 
 app.listen(PORT, () => {
   console.log(`SALAAH TIME Sillod app running on http://localhost:${PORT}`);
