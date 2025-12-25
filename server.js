@@ -63,8 +63,11 @@ if (!fs.existsSync(dataFile)) {
 
 // Load from JSON
 let store = JSON.parse(fs.readFileSync(dataFile));
-let todayData = store.todayData;
-let weekTimetable = store.weekTimetable;
+
+if (!store.masajid) {
+  store.masajid = [];
+}
+
 
 // ---- Other in-memory data ----
 let announcements = [
