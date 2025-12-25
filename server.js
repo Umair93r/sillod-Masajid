@@ -142,5 +142,5 @@ app.get("/admin", basicAuth, (req, res) => {
 app.use(express.static(path.join(__dirname,"public")))
 
 app.listen(PORT, () => {
-  console.log(`Al Masjid Sillod app running on http://localhost:${PORT}`);
+  console.log(`SALAAH TIME Sillod app running on http://localhost:${PORT}`);
 });
