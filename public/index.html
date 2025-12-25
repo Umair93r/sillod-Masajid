@@ -223,37 +223,7 @@
       const list = document.getElementById("timings-list");
       list.innerHTML = "";
 
-      // currently edit new line
-
-      
-fetch("/api/masjid")
-  .then(res => res.json())
-  .then(masjid => {
-    document.getElementById("masjidName").innerText = masjid.name;
-    document.getElementById("address").innerText = masjid.addressLine;
-  });
-
-fetch("/api/timings/week")
-  .then(res => res.json())
-  .then(week => {
-    const table = document.getElementById("weekTable");
-    table.innerHTML = "";
-    week.forEach(d => {
-      table.innerHTML += `
-        <tr>
-          <td>${d.day}</td>
-          <td>${d.fajr}</td>
-          <td>${d.dhuhr}</td>
-          <td>${d.asr}</td>
-          <td>${d.maghrib}</td>
-          <td>${d.isha}</td>
-          <td>${d.jumuah}</td>
-        </tr>
-      `;
-    });
-  });
-
-
+ 
 
 
       // add below new line
