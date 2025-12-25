@@ -211,6 +211,7 @@
   </div>
 
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
+  <script>
 async function loadToday() {
   const res = await fetch("/api/timings/today");
   const data = await res.json();
@@ -298,6 +299,7 @@ async function loadMasjidInfo() {
     console.error(e);
   }
 })();
+     </script>
 
 </body>
 </html>
