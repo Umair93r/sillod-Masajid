@@ -317,38 +317,43 @@ loadTodayMeta();
 
     }
 
-/* ===== PUBLIC SITE AUTO DATE & HIJRI (NO ADMIN, NO API) ===== */
-(function () {
+/* ===== FORCE DATE & HIJRI (NO DEPENDENCY) ===== */
+document.addEventListener("DOMContentLoaded", function () {
 
-  const today = new Date();
+  // Find elements
+  var todayEl = document.getElementById("today-date");
+  var hijriEl = document.getElementById("today-hijri");
 
-  // English Date (India)
-  const engDate = today.toLocaleDateString("en-IN", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
+  if (!todayEl || !hijriEl) return;
 
-  // Hijri Date (Islamic calendar – India approx)
-  let hijriDate = "Hijri date not supported";
+  var now = new Date();
 
+  // English Date (force)
+  var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  var engDate =
+    days[now.getDay()] + ", " +
+    now.getDate() + " " +
+    months[now.getMonth()] + " " +
+    now.getFullYear();
+
+  todayEl.textContent = engDate;
+
+  // Hijri (safe try)
   try {
-    hijriDate = new Intl.DateTimeFormat("en-u-ca-islamic", {
+    var hijri = new Intl.DateTimeFormat("en-u-ca-islamic", {
       day: "numeric",
       month: "long",
       year: "numeric"
-    }).format(today) + " AH";
-  } catch (e) {}
+    }).format(now);
 
-  // Header IDs (already present in your HTML)
-  const engEl = document.getElementById("today-date");
-  const hijriEl = document.getElementById("today-hijri");
+    hijriEl.textContent = hijri + " AH";
+  } catch (e) {
+    hijriEl.textContent = "Hijri (manual)";
+  }
 
-  if (engEl) engEl.textContent = engDate;
-  if (hijriEl) hijriEl.textContent = hijriDate;
-
-})();
+});
      
   </script>
 
