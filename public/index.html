@@ -223,25 +223,6 @@
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
    
-function updateDates() {
-  // English Date
-  const today = new Date();
-  const options = {day:'numeric' };
-  document.getElementById("today-date").innerText =
-    "Today: " + today.toLocaleDateString('en-IN', options);
-
-  // Hijri Date
-  const hijri = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
-    year: 'numeric'
-  }).format(today);
-
-  document.getElementById("today-hijri").innerText =
-    "Hijri: " + hijri;
-}
-
-// page load pe run
-updateDates();
-
 
 
       data.prayers.forEach((p) => {
