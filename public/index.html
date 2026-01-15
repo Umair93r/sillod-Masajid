@@ -316,43 +316,7 @@ loadTodayMeta();
 
     }
 
-/* ===== FORCE DATE & HIJRI (NO DEPENDENCY) ===== */
-document.addEventListener("DOMContentLoaded", function () {
 
-  // Find elements
-  var todayEl = document.getElementById("today-date");
-  var hijriEl = document.getElementById("today-hijri");
-
-  if (!todayEl || !hijriEl) return;
-
-  var now = new Date();
-
-  // English Date (force)
-  var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-  var engDate =
-    days[now.getDay()] + ", " +
-    now.getDate() + " " +
-    months[now.getMonth()] + " " +
-    now.getFullYear();
-
-  todayEl.textContent = engDate;
-
-  // Hijri (safe try)
-  try {
-    var hijri = new Intl.DateTimeFormat("en-u-ca-islamic", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    }).format(now);
-
-    hijriEl.textContent = hijri + " AH";
-  } catch (e) {
-    hijriEl.textContent = "Hijri (manual)";
-  }
-
-});
      
   </script>
 
