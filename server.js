@@ -72,8 +72,7 @@ if (!store.masajid) {
   store.masajid = [];
 }
 
-let todayData = store.todayData;
-let weekTimetable = store.weekTimetable
+
 
 // ---- Other in-memory data ----
 let announcements = [
