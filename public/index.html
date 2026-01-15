@@ -223,26 +223,29 @@
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
   
-function updateDates() {
-  // English Date
-  const today = new Date();
-  const options = {day:'numeric' };
-  document.getElementById("today-tate").innerHTML =
-    "Today: " + today.toLocaleDateString('en-IN', options);
 
-  // Hijri Date
-  const hijri = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
+/* ===== FIXED DATE & HIJRI CODE ===== */
+function updateDates() {
+  const today = new Date();
+
+  // English Date (Full)
+  const engOptions = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  document.getElementById("today-date").innerHTML =
+    today.toLocaleDateString('en-IN', engOptions);
+
+  // Hijri Date (Full)
+  const hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {
+    day: 'numeric',
+    month: 'long',
     year: 'numeric'
   }).format(today);
 
   document.getElementById("today-hijri").innerHTML =
-    "Hijri: " + hijri;
+    hijri + " AH";
 }
 
-// page load pe run
 updateDates();
-
-
+/* ===== END DATE FIX ===== */
 
       data.prayers.forEach((p) => {
         const div = document.createElement("div");
