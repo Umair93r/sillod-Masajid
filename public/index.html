@@ -102,7 +102,7 @@
         </div>
       </div>
       <div class="header-right">
-        <strong id="today-date">Today: --</strong>
+        <strong id="today-date"></strong>
         <span id="today-hijri">-- Hijri --</span>
       </div>
     </header>
@@ -234,7 +234,8 @@
         `;
         list.appendChild(div);
       });
-    
+   
+     
 
     async function loadWeek() {
       const res = await fetch("/api/timings/week");
