@@ -316,6 +316,39 @@ loadTodayMeta();
     }
 
     }
+
+/* ===== PUBLIC SITE AUTO DATE & HIJRI (NO ADMIN, NO API) ===== */
+(function () {
+
+  const today = new Date();
+
+  // English Date (India)
+  const engDate = today.toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  // Hijri Date (Islamic calendar – India approx)
+  let hijriDate = "Hijri date not supported";
+
+  try {
+    hijriDate = new Intl.DateTimeFormat("en-u-ca-islamic", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }).format(today) + " AH";
+  } catch (e) {}
+
+  // Header IDs (already present in your HTML)
+  const engEl = document.getElementById("today-date");
+  const hijriEl = document.getElementById("today-hijri");
+
+  if (engEl) engEl.textContent = engDate;
+  if (hijriEl) hijriEl.textContent = hijriDate;
+
+})();
      
   </script>
 
