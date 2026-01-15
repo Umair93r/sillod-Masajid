@@ -310,34 +310,7 @@ updateDates();
 
       // new
 
-        function setHijriDate() {
-    const today = new Date();
-
-    const hijri = today.toLocaleDateString("en-TN-u-ca-islamic", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-
-    document.getElementById("today-hijri").textContent =
-      hijri + " Hijri";
-  }
-  
-
-    // Run on page load
-    (async () => {
-      try {
-           setAutoDate(); //automatic every day
-        await Promise.all([
-          loadToday(),
-          loadWeek(),
-          loadAnnouncements(),
-          loadMasjidInfo(),
-        ]);
-      } catch (e) {
-        console.error("Failed to load data:", e);
-      }
-    })();
+     
   </script>
 
 </body>
