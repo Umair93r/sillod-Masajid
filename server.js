@@ -3,29 +3,6 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
-function getIndianHijri(offsetDays = 0) {
-  const baseDate = new Date();
-  baseDate.setDate(baseDate.getDate() + offsetDays);
-
-  const hijri = new Intl.DateTimeFormat("en-u-ca-islamic", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(baseDate);
-
-  return hijri + " AH";
-}
-
-function getReadableDate() {
-  return new Date().toLocaleDateString("en-IN", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
