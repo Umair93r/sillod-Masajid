@@ -225,14 +225,12 @@
 function updateDates() {
   // English Date
   const today = new Date();
-  const options = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
-  document.getElementById("today-Date").innerText =
+  const options = {day:'numeric' };
+  document.getElementById("today-date").innerText =
     "Today: " + today.toLocaleDateString('en-IN', options);
 
   // Hijri Date
   const hijri = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
-    day: 'numeric',
-    month: 'long',
     year: 'numeric'
   }).format(today);
 
