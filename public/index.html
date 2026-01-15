@@ -221,26 +221,29 @@
 
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
-    async function loadToday() {
-      const res = await fetch("/api/timings/today");
-      const data = await res.json();
+   <script>
+function updateDates() {
+  // English Date
+  const today = new Date();
+  const options = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById("today-Date").innerText =
+    "Today: " + today.toLocaleDateString('en-IN', options);
 
-     
-      document.getElementById("today-location").textContent = data.city;
-      document.getElementById("city-name").textContent = data.city;
+  // Hijri Date
+  const hijri = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(today);
 
-      const list = document.getElementById("timings-list");
-      list.innerHTML = "";
+  document.getElementById("today-hijri").innerText =
+    "Hijri: " + hijri;
+}
 
- 
+// page load pe run
+updateDates();
+</script>
 
-
-
-    const readable = today.toLocaleDateString("en-GB", options);
-
-    document.getElementById("today-date").textContent =
-      "Today: " + readable;
-  }
 
       data.prayers.forEach((p) => {
         const div = document.createElement("div");
