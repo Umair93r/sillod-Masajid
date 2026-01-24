@@ -49,13 +49,13 @@ if (!fs.existsSync(dataFile)) {
       ],
     },
     weekTimetable: [
-      { day: "Tuesday", fajr: "05:30", dhuhr: "13:30", asr: "16:45", maghrib: "18:05", isha: "20:00", jumuah: "—" },
-      { day: "Wednesday", fajr: "05:31", dhuhr: "13:30", asr: "16:45", maghrib: "18:05", isha: "20:00", jumuah: "—" },
-      { day: "Thursday", fajr: "05:32", dhuhr: "13:30", asr: "16:46", maghrib: "18:06", isha: "20:01", jumuah: "—" },
-      { day: "Friday", fajr: "05:32", dhuhr: "13:30", asr: "16:46", maghrib: "18:06", isha: "20:01", jumuah: "13:45" },
-      { day: "Saturday", fajr: "05:33", dhuhr: "13:31", asr: "16:47", maghrib: "18:07", isha: "20:02", jumuah: "—" },
-      { day: "Sunday", fajr: "05:34", dhuhr: "13:31", asr: "16:47", maghrib: "18:07", isha: "20:02", jumuah: "—" },
-      { day: "Monday", fajr: "05:35", dhuhr: "13:31", asr: "16:48", maghrib: "18:08", isha: "20:03", jumuah: "—" },
+      { day: "Tuesday", fajr: "06:30", dhuhr: "02:30", asr: "16:45", maghrib: "18:05", isha: "20:00", jumuah: "—" },
+      { day: "Wednesday", fajr: "06:30", dhuhr: "13:30", asr: "16:45", maghrib: "18:05", isha: "20:00", jumuah: "—" },
+      { day: "Thursday", fajr: "06:30", dhuhr: "13:30", asr: "16:46", maghrib: "18:06", isha: "20:01", jumuah: "—" },
+      { day: "Friday", fajr: "06:30", dhuhr: "13:30", asr: "16:46", maghrib: "18:06", isha: "20:01", jumuah: "13:45" },
+      { day: "Saturday", fajr: "06:30", dhuhr: "13:31", asr: "16:47", maghrib: "18:07", isha: "20:02", jumuah: "—" },
+      { day: "Sunday", fajr: "06:30", dhuhr: "13:31", asr: "16:47", maghrib: "18:07", isha: "20:02", jumuah: "—" },
+      { day: "Monday", fajr: "06:30", dhuhr: "13:31", asr: "16:48", maghrib: "18:08", isha: "20:03", jumuah: "—" },
     ],
   };
   fs.writeFileSync(dataFile, JSON.stringify(defaultStore, null, 2));
