@@ -223,8 +223,10 @@
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
      
-  console.log("FULL DATA:", data);
-console.log("PRAYERS:", data.prayers);
+  if (!data.prayers || !Array.isArray(data.prayers)) {
+  console.error("prayers is not an array", data.prayers);
+  return;
+}
 
 
       data.prayers.forEach((p) => {
