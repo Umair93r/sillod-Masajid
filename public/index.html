@@ -234,6 +234,11 @@
       const json = await res.json();
 
       console.log("TODAY API >>>", json);
+      document.getElementById("today-date").textContent =
+  json.todayData.dateReadable;
+
+document.getElementById("today-hijri").textContent =
+  json.todayData.hijri;
 
       // EXACT JSON STRUCTURE FIX
       const prayers =
