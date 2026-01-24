@@ -6,8 +6,8 @@
     "prayers": [
       {
         "name": "Fajr",
-        "adhan": "05:55AM",
-        "iqamah": "06:25AM"
+        "adhan": "06:20AM",
+        "iqamah": "06:40AM"
       },
       {
         "name": "Sunrise",
@@ -16,8 +16,8 @@
       },
       {
         "name": "Dhuhr",
-        "adhan": "01:15 PM",
-        "iqamah": "01:30 PM"
+        "adhan": "02:30 PM",
+        "iqamah": "02:45 PM"
       },
       {
         "name": "Asr",
