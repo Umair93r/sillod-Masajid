@@ -225,23 +225,15 @@
   const list = document.getElementById("timing-list");
 
   async function loadToday() {
-    try {
-      const res = await fetch("/api/timings/today");
-      const data = await res.json();
+  const res = await fetch("/api/timings/today");
+  const data = await res.json();
 
-      console.log("API DATA >>>", data);
+  const prayers = data.prayers || data.todayData?.prayers;
 
-      list.innerHTML = "";
-
-      // agar prayers array nahi hai
-      const prayers = data.prayers
-        ? data.prayers
-        : Object.keys(data).map((key) => ({
-            name: key,
-            adhan: data[key]?.adhan,
-            iqamah: data[key]?.iqamah,
-          }));
-
+  if (!Array.isArray(prayers)) {
+    console.error("Invalid today data", data);
+    return;
+  }
       prayers.forEach((p) => {
         const div = document.createElement("div");
         div.className =
@@ -315,10 +307,6 @@
   
 </script>
 
-
-     
-
-  
 
 </body>
 </html>
