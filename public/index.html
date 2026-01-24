@@ -302,24 +302,17 @@
   }
 
   async function loadMasjidInfo() {
-    const res = await fetch("/api/masjid");
-    const info = await res.json();
+      const res = await fetch("/api/masjid");
+      const info = await res.json();
 
-    document.getElementById("masjid-address").innerHTML = `
-      <strong>${info.name}</strong><br />
-      ${info.addressLine}
-    `;
-    document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
-    document.getElementById("masjid-email").textContent = "📧 " + info.email;
-  }
-
-  // 🔥 PAGE LOAD PE CALL
-  document.addEventListener("DOMContentLoaded", () => {
-    loadToday();
-    loadWeek();
-    loadAnnouncements();
-    loadMasjidInfo();
-  });
+      document.getElementById("masjid-address").innerHTML = `
+        <strong>${info.name}</strong><br />
+        ${info.addressLine}
+      `;
+      document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
+      document.getElementById("masjid-email").textContent = "📧 " + info.email;
+    }
+  
 </script>
 
 
