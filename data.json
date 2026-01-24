@@ -36,7 +36,7 @@
       }
     ]
   },
-  "weekTimetable": [
+  "week-body": [
     {
       "day": "Tuesday",
       "fajr": "05:30",
