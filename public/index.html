@@ -336,12 +336,6 @@
     }
   }
 
-  /* ========= PAGE LOAD ========= */
-  document.addEventListener("DOMContentLoaded", () => {
-    loadToday();
-    loadWeek();
-    loadAnnouncements();
-  });
 
   async function loadMasjidInfo() {
       const res = await fetch("/api/masjid");
@@ -354,6 +348,13 @@
       document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
       document.getElementById("masjid-email").textContent = "📧 " + info.email;
     }
+       /* ========= PAGE LOAD ========= */
+  document.addEventListener("DOMContentLoaded", () => {
+    loadToday();
+    loadWeek();
+    loadAnnouncements();
+  });
+
   
 </script>
 
