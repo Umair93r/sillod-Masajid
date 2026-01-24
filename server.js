@@ -40,9 +40,9 @@ if (!fs.existsSync(dataFile)) {
       hijri: "27 Jumada al-Akhirah 1447H",
       city: "Sillod, Maharashtra",
       prayers: [
-        { name: "Fajr", adhan: "05:15 AM", iqamah: "05:30 AM" },
+        { name: "Fajr", adhan: "06:20 AM", iqamah: "06:40 AM" },
         { name: "Sunrise", adhan: "-", iqamah: "06:50 AM" },
-        { name: "Dhuhr", adhan: "01:15 PM", iqamah: "01:30 PM" },
+        { name: "Dhuhr", adhan: "02:30 PM", iqamah: "02:45 PM" },
         { name: "Asr", adhan: "04:30 PM", iqamah: "04:45 PM" },
         { name: "Maghrib", adhan: "Sunset", iqamah: "06:05 PM" },
         { name: "Isha", adhan: "07:45 PM", iqamah: "08:00 PM" },
