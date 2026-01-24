@@ -222,75 +222,110 @@
 
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
-     console.log("API DATA >>>", data);
+  const list = document.getElementById("timing-list");
 
- data.prayers.forEach((p) => {
+  async function loadToday() {
+    try {
+      const res = await fetch("/api/timings/today");
+      const data = await res.json();
+
+      console.log("API DATA >>>", data);
+
+      list.innerHTML = "";
+
+      // agar prayers array nahi hai
+      const prayers = data.prayers
+        ? data.prayers
+        : Object.keys(data).map((key) => ({
+            name: key,
+            adhan: data[key]?.adhan,
+            iqamah: data[key]?.iqamah,
+          }));
+
+      prayers.forEach((p) => {
         const div = document.createElement("div");
-        div.className = "timing-item" + (p.name === "Maghrib" ? " highlight" : "");
+        div.className =
+          "timing-item" +
+          (p.name.toLowerCase() === "maghrib" ? " highlight" : "");
+
         div.innerHTML = `
           <div class="timing-name">${p.name}</div>
-          <div class="timing-time">${p.iqamah}</div>
-          <div class="timing-extra">Adhan: ${p.adhan}</div>
+          <div class="timing-time">${p.iqamah || "-"}</div>
+          <div class="timing-extra">Adhan: ${p.adhan || "-"}</div>
         `;
+
         list.appendChild(div);
       });
-   
+    } catch (err) {
+      console.error("Failed to load today timings", err);
+    }
+  }
+
+  async function loadWeek() {
+    const res = await fetch("/api/timings/week");
+    const week = await res.json();
+    const tbody = document.getElementById("week-body");
+    tbody.innerHTML = "";
+
+    week.forEach((row, index) => {
+      const tr = document.createElement("tr");
+      if (index === 0) tr.className = "today-row";
+
+      tr.innerHTML = `
+        <td>${row.day}</td>
+        <td>${row.fajr}</td>
+        <td>${row.dhuhr}</td>
+        <td>${row.asr}</td>
+        <td>${row.maghrib}</td>
+        <td>${row.isha}</td>
+        <td>${row.jumuah}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function loadAnnouncements() {
+    const res = await fetch("/api/announcements");
+    const data = await res.json();
+    const container = document.getElementById("announcement-list");
+    container.innerHTML = "";
+
+    data.forEach((ann) => {
+      const div = document.createElement("div");
+      div.className = "announcement-item";
+      div.innerHTML = `
+        <div class="ann-title">${ann.title}</div>
+        <div class="ann-meta">${ann.text}</div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  async function loadMasjidInfo() {
+    const res = await fetch("/api/masjid");
+    const info = await res.json();
+
+    document.getElementById("masjid-address").innerHTML = `
+      <strong>${info.name}</strong><br />
+      ${info.addressLine}
+    `;
+    document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
+    document.getElementById("masjid-email").textContent = "📧 " + info.email;
+  }
+
+  // 🔥 PAGE LOAD PE CALL
+  document.addEventListener("DOMContentLoaded", () => {
+    loadToday();
+    loadWeek();
+    loadAnnouncements();
+    loadMasjidInfo();
+  });
+</script>
+
 
      
 
-    async function loadWeek() {
-      const res = await fetch("/api/timings/week");
-      const week = await res.json();
-      const tbody = document.getElementById("week-body");
-      tbody.innerHTML = "";
-
-      week.forEach((row, index) => {
-        const tr = document.createElement("tr");
-        if (index === 0) tr.className = "today-row"; // mark first row as "today"
-        tr.innerHTML = `
-          <td>${row.day}</td>
-          <td>${row.fajr}</td>
-          <td>${row.dhuhr}</td>
-          <td>${row.asr}</td>
-          <td>${row.maghrib}</td>
-          <td>${row.isha}</td>
-          <td>${row.jumuah}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    async function loadAnnouncements() {
-      const res = await fetch("/api/announcements");
-      const data = await res.json();
-      const container = document.getElementById("announcement-list");
-      container.innerHTML = "";
-
-      data.forEach((ann) => {
-        const div = document.createElement("div");
-        div.className = "announcement-item";
-        div.innerHTML = `
-          <div class="ann-title">${ann.title}</div>
-          <div class="ann-meta">${ann.text}</div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    async function loadMasjidInfo() {
-      const res = await fetch("/api/masjid");
-      const info = await res.json();
-
-      document.getElementById("masjid-address").innerHTML = `
-        <strong>${info.name}</strong><br />
-        ${info.addressLine}
-      `;
-      document.getElementById("masjid-phone").textContent = "📞 " + info.phone;
-      document.getElementById("masjid-email").textContent = "📧 " + info.email;
-    }
-
   
-  </script>
 
 </body>
 </html>
