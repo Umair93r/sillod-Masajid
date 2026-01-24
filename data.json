@@ -39,8 +39,8 @@
   "weekTimetable": [
     {
       "day": "Tuesday",
-      "fajr": "05:30",
-      "dhuhr": "13:30",
+      "fajr": "06:30",
+      "dhuhr": "02:30",
       "asr": "16:45",
       "maghrib": "18:05",
       "isha": "20:00",
