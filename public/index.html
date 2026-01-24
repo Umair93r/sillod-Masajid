@@ -222,8 +222,12 @@
 
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
- const list = document.getElementById("timing-list");
+  /* ========= ELEMENTS ========= */
+  const timingList = document.getElementById("timing-list");
+  const weekBody = document.getElementById("week-body");
+  const annContainer = document.getElementById("announcement-list");
 
+  /* ========= TODAY TIMINGS ========= */
   async function loadToday() {
     try {
       const res = await fetch("/api/timings/today");
@@ -231,10 +235,18 @@
 
       console.log("TODAY API >>>", json);
 
-      // ✅ EXACT FIX
-      const prayers = json.todayData.prayers;
+      // EXACT JSON STRUCTURE FIX
+      const prayers =
+        json.todayData?.prayers ||
+        json.prayers ||
+        [];
 
-      list.innerHTML = "";
+      timingList.innerHTML = "";
+
+      if (!prayers.length) {
+        timingList.innerHTML = "<p>No timings available</p>";
+        return;
+      }
 
       prayers.forEach((p) => {
         const div = document.createElement("div");
@@ -244,55 +256,92 @@
 
         div.innerHTML = `
           <div class="timing-name">${p.name}</div>
-          <div class="timing-time">${p.iqamah}</div>
-          <div class="timing-extra">Adhan: ${p.adhan}</div>
+          <div class="timing-time">${p.iqamah || "-"}</div>
+          <div class="timing-extra">Adhan: ${p.adhan || "-"}</div>
         `;
 
-        list.appendChild(div);
+        timingList.appendChild(div);
       });
-    } catch (e) {
-      console.error("TODAY ERROR", e);
+    } catch (err) {
+      console.error("TODAY ERROR", err);
     }
   }
+
+  /* ========= WEEK TIMETABLE ========= */
   async function loadWeek() {
-    const res = await fetch("/api/timings/week");
-    const week = await res.json();
-    const tbody = document.getElementById("week-body");
-    tbody.innerHTML = "";
+    try {
+      const res = await fetch("/api/timings/week");
+      const json = await res.json();
 
-    week.forEach((row, index) => {
-      const tr = document.createElement("tr");
-      if (index === 0) tr.className = "today-row";
+      console.log("WEEK API >>>", json);
 
-      tr.innerHTML = `
-        <td>${row.day}</td>
-        <td>${row.fajr}</td>
-        <td>${row.dhuhr}</td>
-        <td>${row.asr}</td>
-        <td>${row.maghrib}</td>
-        <td>${row.isha}</td>
-        <td>${row.jumuah}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+      const week =
+        json.weekTimetable ||
+        json.week ||
+        [];
+
+      weekBody.innerHTML = "";
+
+      if (!week.length) {
+        weekBody.innerHTML =
+          "<tr><td colspan='7'>No data</td></tr>";
+        return;
+      }
+
+      week.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        if (index === 0) tr.className = "today-row";
+
+        tr.innerHTML = `
+          <td>${row.day}</td>
+          <td>${row.fajr}</td>
+          <td>${row.dhuhr}</td>
+          <td>${row.asr}</td>
+          <td>${row.maghrib}</td>
+          <td>${row.isha}</td>
+          <td>${row.jumuah}</td>
+        `;
+
+        weekBody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error("WEEK ERROR", err);
+    }
   }
 
+  /* ========= ANNOUNCEMENTS ========= */
   async function loadAnnouncements() {
-    const res = await fetch("/api/announcements");
-    const data = await res.json();
-    const container = document.getElementById("announcement-list");
-    container.innerHTML = "";
+    try {
+      const res = await fetch("/api/announcements");
+      const data = await res.json();
 
-    data.forEach((ann) => {
-      const div = document.createElement("div");
-      div.className = "announcement-item";
-      div.innerHTML = `
-        <div class="ann-title">${ann.title}</div>
-        <div class="ann-meta">${ann.text}</div>
-      `;
-      container.appendChild(div);
-    });
+      annContainer.innerHTML = "";
+
+      if (!data.length) {
+        annContainer.innerHTML = "<p>No announcements</p>";
+        return;
+      }
+
+      data.forEach((ann) => {
+        const div = document.createElement("div");
+        div.className = "announcement-item";
+        div.innerHTML = `
+          <div class="ann-title">${ann.title}</div>
+          <div class="ann-meta">${ann.text}</div>
+        `;
+        annContainer.appendChild(div);
+      });
+    } catch (err) {
+      console.error("ANN ERROR", err);
+    }
   }
+
+  /* ========= PAGE LOAD ========= */
+  document.addEventListener("DOMContentLoaded", () => {
+    loadToday();
+    loadWeek();
+    loadAnnouncements();
+  });
 
   async function loadMasjidInfo() {
       const res = await fetch("/api/masjid");
