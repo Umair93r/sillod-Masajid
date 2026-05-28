@@ -236,21 +236,20 @@
       console.log("TODAY API >>>", json);
     
       // Update Hijri date in header
+      // API returns hijri at top level: json.hijri
       if (json.hijri) {
         document.getElementById("today-hijri").textContent = json.hijri;
       }
       
       // Update city name in subtitle
+      // API returns city at top level: json.city
       if (json.city) {
         document.getElementById("city-name").textContent = json.city;
         document.getElementById("today-location").textContent = json.city;
       }
 
-      // EXACT JSON STRUCTURE FIX
-      const prayers =
-        json.todayData?.prayers ||
-        json.prayers ||
-        [];
+      // Extract prayers array - API returns prayers at top level
+      const prayers = json.prayers || [];
 
       timingList.innerHTML = "";
 
@@ -286,10 +285,7 @@
 
       console.log("WEEK API >>>", json);
 
-      const week =
-        json.weekTimetable ||
-        json.week ||
-        [];
+      const week = Array.isArray(json) ? json : (json.weekTimetable || []);
 
       weekBody.innerHTML = "";
 
