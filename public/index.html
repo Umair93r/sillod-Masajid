@@ -206,7 +206,7 @@
           </div>
 
           <div class="contact-row">
-            <span id="masjid-phone">📞 9372526677</span>
+            <span id="masjid-phone">📞 0000000000</span>
             <span id="masjid-email">📧 rangrezumair286@gmail.com</span>
             <span>⏱ Open for all 5 daily prayers</span>
           </div>
@@ -223,8 +223,8 @@
   <!-- SIMPLE FRONTEND JS TO CALL BACKEND -->
    <script>
   /* ========= ELEMENTS ========= */
-  const timingList = document.getElementById("timings-list");
-  const weekBody = document.getElementById("week-body");
+  const timingList = document.getElementById("todayData");
+  const weekBody = document.getElementById("weekTimetable");
   const annContainer = document.getElementById("announcement-list");
 
   /* ========= TODAY TIMINGS ========= */
@@ -242,10 +242,10 @@
         json.prayers ||
         [];
 
-      timingList.innerHTML = "";
+      todayData.innerHTML = "";
 
       if (!prayers.length) {
-        timingList.innerHTML = "<p>No timings available</p>";
+        todayData.innerHTML = "<p>No timings available</p>";
         return;
       }
 
